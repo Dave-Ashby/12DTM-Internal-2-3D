@@ -25,14 +25,12 @@ public class PlayerController : MonoBehaviour
 
         horizontalInput = Input.GetAxis("Horizontal");
 
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * horizontalSpeed);
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime  * horizontalSpeed, Space.World);
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            Debug.Log("W");
         }
-
 
     }
 }
