@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCrouch : MonoBehaviour
 {
-    float crouchForce = 5.0f;
+    float crouchForce = 0.475f;
     bool isCrouching;
 
     // Start is called before the first frame update
@@ -20,14 +20,14 @@ public class PlayerCrouch : MonoBehaviour
         {
             if (isCrouching == false)
             {
-                transform.Translate(Vector3.down * Time.deltaTime * crouchForce);
+                transform.Translate(Vector3.down * crouchForce);
                 isCrouching = true;
             }
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
 
-            transform.Translate(Vector3.up * Time.deltaTime * crouchForce);
+            transform.Translate(Vector3.up * crouchForce);
             isCrouching = false;
 
         }
