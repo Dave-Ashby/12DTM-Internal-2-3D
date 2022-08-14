@@ -16,13 +16,12 @@ public class PlayerCrouch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && isCrouching == false)
         {
-            if (isCrouching == false)
-            {
-                transform.Translate(Vector3.down * crouchForce);
-                isCrouching = true;
-            }
+ 
+            transform.Translate(Vector3.down * crouchForce);
+            isCrouching = true;
+           
         }
         if (Input.GetKeyUp(KeyCode.S))
         {

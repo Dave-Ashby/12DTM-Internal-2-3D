@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     private float jumpForce = 5.0f;
 
+    public bool isTouchingGround;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRB = gameObject.GetComponent<Rigidbody>();
-    }
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -27,10 +28,19 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime  * horizontalSpeed, Space.World);
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && isTouchingGround == true)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-
     }
+
+    public void TouchingGround()
+    {
+        isTouchingGround = true;
+    }
+    public void NotTouchingGround()
+    {
+        isTouchingGround = false;
+    }
+
 }
