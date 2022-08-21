@@ -22,6 +22,10 @@ public class PlayerCrouch : MonoBehaviour
             isCrouching = true;
             GameObject.Find("Player").GetComponent<PlayerController>().Crouching();
         }
+        if (Input.GetKey(KeyCode.S))
+        {
+            GameObject.Find("Player").GetComponent<PlayerController>().Crouching();
+        }
         if (Input.GetKeyUp(KeyCode.S))
         {
             transform.Translate(Vector3.up * crouchForce);

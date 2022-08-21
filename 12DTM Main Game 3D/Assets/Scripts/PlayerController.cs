@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-25, 25, 25);
         }
 
-            if (Input.GetKeyDown(KeyCode.W) && isTouchingGround == true)
+        if (Input.GetKeyDown(KeyCode.W) && isTouchingGround == true)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -53,7 +53,10 @@ public class PlayerController : MonoBehaviour
     }
     public void Crouching()
     {
-        horizontalSpeed = 2.0f;
+        if (isTouchingGround == true)
+        {
+            horizontalSpeed = 2.0f;
+        }
         jumpForce = 3.0f;
     }
     public void NotCrouching()
