@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     //Attacking
     public bool alreadyAttacked;
     public float timeBetweenAttacks;
+    public float health = 10f;
 
     //States
     public float sightRange, attackRange;
@@ -71,7 +72,7 @@ public class EnemyController : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-
+            //Insert Attack Code
 
 
             alreadyAttacked = true;
@@ -81,8 +82,18 @@ public class EnemyController : MonoBehaviour
 
     void ResetAttack()
     {
-        
+        alreadyAttacked = false; 
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
 
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 2f)
+    }
+
+    void DestroyEnemy()
+    {
+        //Death Animation Code
+    }
 }
