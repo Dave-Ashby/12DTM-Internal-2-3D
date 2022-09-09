@@ -63,12 +63,16 @@ public class EnemyController : MonoBehaviour
     void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        Vector3 targetPostition = new Vector3(player.position.x, this.transform.position.y, player.position.z);
+        this.transform.LookAt(targetPostition);
+
     }
 
     void AttackPlayer()
     {       
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        Vector3 targetPostition = new Vector3(player.position.x, this.transform.position.y, player.position.z);
+        this.transform.LookAt(targetPostition);
 
         if (!alreadyAttacked)
         {
@@ -89,7 +93,7 @@ public class EnemyController : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 2f)
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 2f);
     }
 
     void DestroyEnemy()
@@ -97,3 +101,4 @@ public class EnemyController : MonoBehaviour
         //Death Animation Code
     }
 }
+
