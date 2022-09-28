@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public Animator anim;
+
     public NavMeshAgent agent;
 
     public Transform player;
@@ -30,6 +32,7 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -44,6 +47,8 @@ public class EnemyController : MonoBehaviour
 
     void Patrolling()
     {
+        anim.SetBool("Patrolling", true);
+        anim.SetBool("Attacking", false);
         if (!walkPointSet) SearchWalkPoint();
         if (walkPointSet) agent.SetDestination(walkPoint);
 
@@ -55,13 +60,16 @@ public class EnemyController : MonoBehaviour
     void SearchWalkPoint()
     {
         float randomX = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z);
+        walkPoint = new Vector3(transform.position.x + randomX, 0, 0);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
     }
 
     void ChasePlayer()
     {
+        anim.SetBool("Patrolling", true);
+        anim.SetBool("Attacking", false);
+
         agent.SetDestination(player.position);
         Vector3 targetPostition = new Vector3(player.position.x, this.transform.position.y, player.position.z);
         this.transform.LookAt(targetPostition);
@@ -69,7 +77,10 @@ public class EnemyController : MonoBehaviour
     }
 
     void AttackPlayer()
-    {       
+    {
+        anim.SetBool("Patrolling", false);
+        anim.SetBool("Attacking", true);
+
         agent.SetDestination(transform.position);
         Vector3 targetPostition = new Vector3(player.position.x, this.transform.position.y, player.position.z);
         this.transform.LookAt(targetPostition);

@@ -299,6 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1154375690}
   - component: {fileID: 1154375689}
+  - component: {fileID: 1154375691}
   m_Layer: 0
   m_Name: NavMesh Surface
   m_TagString: Untagged
@@ -350,6 +351,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1154375691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154375688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9177cf87bccae489c15a871b1cd03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585178766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1628164954403393413, guid: c076b7959632ab14ea7fa82f6b88db42, type: 3}
@@ -434,11 +447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2761082c7dc2b614392d66e8f87713e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.05
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2761082c7dc2b614392d66e8f87713e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2761082c7dc2b614392d66e8f87713e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -587,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c076b7959632ab14ea7fa82f6b88db42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8891025
+      value: -4.72
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c076b7959632ab14ea7fa82f6b88db42, type: 3}
       propertyPath: m_LocalPosition.y
@@ -742,7 +755,7 @@ Transform:
   m_GameObject: {fileID: 1888525248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 29.442001, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -814,6 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd1398c1487e184bb7ea9d4f62ffdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1896344074}
   agent: {fileID: 0}
   player: {fileID: 845241642}
   whatIsGround:
@@ -828,8 +842,8 @@ MonoBehaviour:
   alreadyAttacked: 0
   timeBetweenAttacks: 0
   health: 10
-  sightRange: 10
-  attackRange: 5
+  sightRange: 5
+  attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &1896344077
