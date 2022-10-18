@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalSpeed = 5.0f;
     public float horizontalInput;
-    private float jumpForce = 5.0f;
+    private float jumpForce = 8.0f;
 
     public bool isTouchingGround;
 
@@ -57,11 +57,11 @@ public class PlayerController : MonoBehaviour
         {
             horizontalSpeed = 2.0f;
         }
-        jumpForce = 3.0f;
+        jumpForce = 4.0f;
     }
     public void NotCrouching()
     {
         horizontalSpeed = 5.0f;
-        jumpForce = 5.0f;
+        jumpForce = 8.0f;
     }
 }
