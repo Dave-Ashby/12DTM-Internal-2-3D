@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     public Animator anim;
+    public string deathAnim = "Death";
 
     public NavMeshAgent agent;
 
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour
     //Attacking
     public bool alreadyAttacked;
     public float timeBetweenAttacks;
-    public float health = 10f;
+    public float health = 5f;
 
     //States
     public float sightRange, attackRange;
@@ -60,7 +61,7 @@ public class EnemyController : MonoBehaviour
     void SearchWalkPoint()
     {
         float randomX = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, 0, 0);
+        walkPoint = new Vector3(transform.position.x + randomX, this.transform.position.y, 0);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
     }
@@ -104,12 +105,23 @@ public class EnemyController : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 2f);
+        if (health == 0) Invoke(nameof(DestroyEnemy), 0.0f);
     }
 
     void DestroyEnemy()
     {
         //Death Animation Code
+        anim.Play(deathAnim, 0, 0.0f);
+        Destroy(gameObject, 3);
+    }
+
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.gameObject.CompareTag("Spike"))
+        {
+            TakeDamage(1);
+            Debug.Log("hit");
+        }
     }
 }
 
