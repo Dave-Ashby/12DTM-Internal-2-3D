@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    // Camera
+    CameraController cameraController;
+    public GameObject mainCamera;
+
     // Shoot Projectile script
     FlyForwards flyForwards;
 
@@ -18,14 +23,20 @@ public class PlayerController : MonoBehaviour
     // Combat floats
     public float spikeOffset;
     public float health = 3.0f;
+    public float invulnerabilityTime;
 
     // Booleans
     public bool isTouchingGround;
     public bool isFacingForward;
     public bool isCrouching;
+    public bool invulnerable;
 
     // Projectile
     public GameObject spike;
+
+    // Texts
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI loseText;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +44,9 @@ public class PlayerController : MonoBehaviour
         playerRB = gameObject.GetComponent<Rigidbody>();
         flyForwards = spike.GetComponent<FlyForwards>();
         isFacingForward = true;
+        UpdateHealth();
+        cameraController = mainCamera.GetComponent<CameraController>();
+        loseText.enabled = false;
     }
     // Update is called once per frame
     void Update()
@@ -107,12 +121,28 @@ public class PlayerController : MonoBehaviour
     // Health system
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        if (invulnerable == false)
+        {
+            health -= damage;
+            UpdateHealth();
+            StartCoroutine(JustHurt());
+        }
         if (health == 0)
         {
-            //Insert Death
-            Debug.Log("You Lose");
+            cameraController.GameOver();
+            loseText.enabled = true;
+            Destroy(gameObject);
         }
+    }
+    IEnumerator JustHurt()
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(invulnerabilityTime);
+        invulnerable = false;
+    }
+    public void UpdateHealth()
+    {
+        healthText.text = "Health: " + health;
     }
 
     //Collisions
@@ -121,11 +151,15 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(1);
+            
         }
         if (collision.gameObject.CompareTag("Water"))
         {
-            //Insert Death
-            Debug.Log("You Lose");
+            health = 0;
+            UpdateHealth();
+            cameraController.GameOver();
+            loseText.enabled = true;
+            Destroy(gameObject);
         }
 
     }

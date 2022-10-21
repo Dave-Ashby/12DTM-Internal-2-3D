@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class EnemyController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class EnemyController : MonoBehaviour
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
+
+    public TextMeshProUGUI winText;
 
     //Patroling
     public Vector3 walkPoint;
@@ -34,6 +37,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        winText.enabled = false;
     }
 
     private void Update()
@@ -112,7 +116,9 @@ public class EnemyController : MonoBehaviour
     {
         //Death Animation Code
         anim.Play(deathAnim, 0, 0.0f);
+        winText.enabled = true;
         Destroy(gameObject, 3);
+        gameObject.GetComponent<EnemyController>().enabled = false;
     }
 
     void OnCollisionEnter(Collision hit)

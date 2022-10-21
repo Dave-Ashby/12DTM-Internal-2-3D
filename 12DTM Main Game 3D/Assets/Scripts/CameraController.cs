@@ -25,4 +25,9 @@ class CameraController : MonoBehaviour
     {
         transform.position = new Vector3(player.position.x + xOffset, player.position.y + yOffset, player.position.z + zOffset);
     }
+
+    public void GameOver()
+    {
+        gameObject.GetComponent<CameraController>().enabled = false;
+    }
 }
